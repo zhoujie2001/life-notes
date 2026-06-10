@@ -7,5 +7,21 @@
     "coverImage": "/images/music/haibian-de-manchesite.jpg",
     "description": "默认背景 BGM。适合作为站点的安静底色，陪伴阅读、记录与思考。",
     "isDefaultBgm": true
+  },
+  {
+    "id": "forest-placeholder",
+    "title": "林间留白",
+    "artist": "Life Notes",
+    "src": "/music/forest-placeholder.mp3",
+    "coverImage": "/images/music/forest-placeholder.jpg",
+    "description": "播放列表占位曲目。后续可替换为个人收藏的纯音乐。"
+  },
+  {
+    "id": "morning-placeholder",
+    "title": "晨光片刻",
+    "artist": "Life Notes",
+    "src": "/music/morning-placeholder.mp3",
+    "coverImage": "/images/music/morning-placeholder.jpg",
+    "description": "播放列表占位曲目，用于验证上一首、下一首和列表切换体验。"
   }
 ]
