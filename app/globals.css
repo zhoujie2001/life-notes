@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #FAFCFA;
+  --surface: #FFFFFF;
+  --primary: #A8D5BA;
+  --primary-soft: #CFEAD6;
+  --text: #24332A;
+  --text-muted: #5E7465;
+  --border: #E4EFE7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(207, 234, 214, 0.56), transparent 30rem),
+    linear-gradient(180deg, #FAFCFA 0%, #FFFFFF 48%, #FAFCFA 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--primary-soft);
+  color: var(--text);
+}
+
+.prose-life {
+  color: var(--text);
+  line-height: 1.9;
+}
+
+.prose-life p {
+  margin: 1rem 0;
+}
+
+.prose-life h1,
+.prose-life h2,
+.prose-life h3 {
+  color: var(--text);
+  font-weight: 650;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose-life h1 {
+  font-size: 2rem;
+}
+
+.prose-life h2 {
+  font-size: 1.5rem;
+}
+
+.prose-life h3 {
+  font-size: 1.25rem;
+}
+
+.prose-life ul,
+.prose-life ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.prose-life li {
+  margin: 0.45rem 0;
+}
+
+.prose-life code {
+  border-radius: 0.5rem;
+  background: var(--primary-soft);
+  padding: 0.15rem 0.4rem;
+  font-size: 0.9em;
+}
+
+.prose-life pre {
+  overflow-x: auto;
+  border-radius: 1rem;
+  background: #24332A;
+  color: #FAFCFA;
+  padding: 1rem;
+}
+
+.prose-life pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+.prose-life blockquote {
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+  color: var(--text-muted);
+}
