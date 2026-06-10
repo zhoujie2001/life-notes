@@ -1,7 +1,17 @@
 import Link from 'next/link';
-import { ArrowRight, BookOpen, Camera, Music2 } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays, Camera, Music2 } from 'lucide-react';
+import { PostCard } from '@/components/blog/post-card';
+import { MomentCard } from '@/components/moments/moment-card';
+import { getAllPosts } from '@/lib/posts';
+import { getAllMoments } from '@/lib/moments';
+import { getDefaultTrack, getTracks } from '@/lib/music';
 
 export default function HomePage() {
+  const latestPosts = getAllPosts().slice(0, 3);
+  const latestMoments = getAllMoments().slice(0, 2);
+  const defaultTrack = getDefaultTrack();
+  const tracks = getTracks();
+
   return (
     <div className="mx-auto max-w-6xl px-5">
       <section className="grid gap-10 py-20 md:grid-cols-[1.2fr_0.8fr] md:items-center">
@@ -20,22 +30,77 @@ export default function HomePage() {
             <p className="text-sm text-leaf-700">Now</p>
             <h2 className="mt-2 text-2xl font-semibold text-leaf-900">记录正在生长的自己</h2>
             <p className="mt-4 leading-7 text-leaf-700">以浅绿色和留白作为视觉底色，写下学习、思考、日常和音乐。</p>
+            <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+              <div className="rounded-2xl bg-white/80 p-3">
+                <p className="text-xl font-semibold text-leaf-900">{latestPosts.length}</p>
+                <p className="mt-1 text-xs text-leaf-700">最新文章</p>
+              </div>
+              <div className="rounded-2xl bg-white/80 p-3">
+                <p className="text-xl font-semibold text-leaf-900">{latestMoments.length}</p>
+                <p className="mt-1 text-xs text-leaf-700">近期记录</p>
+              </div>
+              <div className="rounded-2xl bg-white/80 p-3">
+                <p className="text-xl font-semibold text-leaf-900">{tracks.length}</p>
+                <p className="mt-1 text-xs text-leaf-700">音乐曲目</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="grid gap-5 pb-20 md:grid-cols-3">
+      <section className="grid gap-5 pb-16 md:grid-cols-3">
         {[
-          { icon: BookOpen, title: '心得与学习', desc: '沉淀阶段性思考、技术学习和复盘。' },
-          { icon: Camera, title: '日常记录', desc: '通过图片、视频和简短文字记录生活片段。' },
-          { icon: Music2, title: '音乐空间', desc: '以纯音乐作为阅读和记录时的背景。' },
+          { icon: BookOpen, title: '心得与学习', desc: '沉淀阶段性思考、技术学习和复盘。', href: '/blog' },
+          { icon: Camera, title: '日常记录', desc: '通过图片、视频和简短文字记录生活片段。', href: '/moments' },
+          { icon: Music2, title: '音乐空间', desc: '以纯音乐作为阅读和记录时的背景。', href: '/music' },
         ].map((item) => (
-          <div key={item.title} className="rounded-3xl border border-leaf-200 bg-white p-6 shadow-sm">
+          <Link key={item.title} href={item.href} className="rounded-3xl border border-leaf-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-leaf-300 hover:shadow-soft">
             <item.icon className="text-leaf-700" size={22} />
             <h3 className="mt-5 text-lg font-semibold text-leaf-900">{item.title}</h3>
             <p className="mt-3 leading-7 text-leaf-700">{item.desc}</p>
-          </div>
+          </Link>
         ))}
+      </section>
+
+      <section className="pb-16">
+        <div className="mb-7 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-sm text-leaf-700">Latest Blog</p>
+            <h2 className="mt-2 text-3xl font-semibold text-leaf-900">最新心得与学习</h2>
+          </div>
+          <Link href="/blog" className="hidden rounded-full border border-leaf-200 bg-white px-4 py-2 text-sm text-leaf-700 transition hover:bg-leaf-100 sm:inline-flex">查看全部</Link>
+        </div>
+        <div className="grid gap-5">
+          {latestPosts.length > 0 ? latestPosts.map((post) => <PostCard key={post.slug} post={post} />) : <div className="rounded-3xl border border-dashed border-leaf-300 bg-white/70 p-8 text-leaf-700">还没有文章。</div>}
+        </div>
+      </section>
+
+      <section className="pb-16">
+        <div className="mb-7 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-sm text-leaf-700">Recent Moments</p>
+            <h2 className="mt-2 text-3xl font-semibold text-leaf-900">近期日常记录</h2>
+          </div>
+          <Link href="/moments" className="hidden rounded-full border border-leaf-200 bg-white px-4 py-2 text-sm text-leaf-700 transition hover:bg-leaf-100 sm:inline-flex">查看全部</Link>
+        </div>
+        <div className="grid gap-5 md:grid-cols-2">
+          {latestMoments.length > 0 ? latestMoments.map((moment) => <MomentCard key={moment.slug} moment={moment} />) : <div className="rounded-3xl border border-dashed border-leaf-300 bg-white/70 p-8 text-leaf-700">还没有日常记录。</div>}
+        </div>
+      </section>
+
+      <section className="pb-24">
+        <div className="rounded-[2rem] border border-leaf-200 bg-white p-8 shadow-soft md:flex md:items-center md:justify-between md:gap-10">
+          <div>
+            <p className="inline-flex items-center gap-2 text-sm text-leaf-700"><Music2 size={16} /> Now Playing</p>
+            <h2 className="mt-3 text-3xl font-semibold text-leaf-900">{defaultTrack.title}</h2>
+            <p className="mt-2 text-leaf-700">{defaultTrack.artist}</p>
+            {defaultTrack.description && <p className="mt-4 max-w-2xl leading-8 text-leaf-700">{defaultTrack.description}</p>}
+            <div className="mt-5 flex flex-wrap gap-2">
+              {tracks.map((track) => <span key={track.id} className="rounded-full border border-leaf-200 px-3 py-1 text-xs text-leaf-700">{track.title}</span>)}
+            </div>
+          </div>
+          <Link href="/music" className="mt-7 inline-flex items-center gap-2 rounded-full bg-leaf-300 px-5 py-3 text-sm font-medium text-leaf-900 transition hover:scale-[1.02] md:mt-0">打开播放器 <ArrowRight size={16} /></Link>
+        </div>
       </section>
     </div>
   );
