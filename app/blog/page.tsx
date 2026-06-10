@@ -1,4 +1,6 @@
 import { PostCard } from '@/components/blog/post-card';
+import { EmptyState } from '@/components/ui/empty-state';
+import { PageHero } from '@/components/ui/page-hero';
 import { getAllPosts, getAllTags } from '@/lib/posts';
 
 export default function BlogPage() {
@@ -7,9 +9,7 @@ export default function BlogPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-16">
-      <p className="text-sm text-leaf-700">Blog</p>
-      <h1 className="mt-3 text-4xl font-semibold text-leaf-900">心得与学习</h1>
-      <p className="mt-4 max-w-2xl leading-8 text-leaf-700">这里用于沉淀学习笔记、阶段复盘和长期思考。所有文章由 `content/posts/*.mdx` 文件驱动。</p>
+      <PageHero eyebrow="Blog" title="心得与学习" description="这里用于沉淀学习笔记、阶段复盘和长期思考。所有文章由 content/posts/*.mdx 文件驱动。" />
 
       {tags.length > 0 && (
         <div className="mt-8 flex flex-wrap gap-2">
@@ -23,7 +23,7 @@ export default function BlogPage() {
         {posts.length > 0 ? (
           posts.map((post) => <PostCard key={post.slug} post={post} />)
         ) : (
-          <div className="rounded-3xl border border-dashed border-leaf-300 bg-white/70 p-8 text-leaf-700">还没有文章。请在 `content/posts` 中新增 `.mdx` 文件。</div>
+          <EmptyState>还没有文章。请在 `content/posts` 中新增 `.mdx` 文件。</EmptyState>
         )}
       </div>
     </div>

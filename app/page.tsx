@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { ArrowRight, BookOpen, CalendarDays, Camera, Music2 } from 'lucide-react';
 import { PostCard } from '@/components/blog/post-card';
 import { MomentCard } from '@/components/moments/moment-card';
+import { EmptyState } from '@/components/ui/empty-state';
+import { SectionHeading } from '@/components/ui/section-heading';
 import { getAllPosts } from '@/lib/posts';
 import { getAllMoments } from '@/lib/moments';
 import { getDefaultTrack, getTracks } from '@/lib/music';
@@ -63,28 +65,16 @@ export default function HomePage() {
       </section>
 
       <section className="pb-16">
-        <div className="mb-7 flex items-end justify-between gap-4">
-          <div>
-            <p className="text-sm text-leaf-700">Latest Blog</p>
-            <h2 className="mt-2 text-3xl font-semibold text-leaf-900">最新心得与学习</h2>
-          </div>
-          <Link href="/blog" className="hidden rounded-full border border-leaf-200 bg-white px-4 py-2 text-sm text-leaf-700 transition hover:bg-leaf-100 sm:inline-flex">查看全部</Link>
-        </div>
+        <SectionHeading eyebrow="Latest Blog" title="最新心得与学习" href="/blog" />
         <div className="grid gap-5">
-          {latestPosts.length > 0 ? latestPosts.map((post) => <PostCard key={post.slug} post={post} />) : <div className="rounded-3xl border border-dashed border-leaf-300 bg-white/70 p-8 text-leaf-700">还没有文章。</div>}
+          {latestPosts.length > 0 ? latestPosts.map((post) => <PostCard key={post.slug} post={post} />) : <EmptyState>还没有文章。</EmptyState>}
         </div>
       </section>
 
       <section className="pb-16">
-        <div className="mb-7 flex items-end justify-between gap-4">
-          <div>
-            <p className="text-sm text-leaf-700">Recent Moments</p>
-            <h2 className="mt-2 text-3xl font-semibold text-leaf-900">近期日常记录</h2>
-          </div>
-          <Link href="/moments" className="hidden rounded-full border border-leaf-200 bg-white px-4 py-2 text-sm text-leaf-700 transition hover:bg-leaf-100 sm:inline-flex">查看全部</Link>
-        </div>
+        <SectionHeading eyebrow="Recent Moments" title="近期日常记录" href="/moments" />
         <div className="grid gap-5 md:grid-cols-2">
-          {latestMoments.length > 0 ? latestMoments.map((moment) => <MomentCard key={moment.slug} moment={moment} />) : <div className="rounded-3xl border border-dashed border-leaf-300 bg-white/70 p-8 text-leaf-700">还没有日常记录。</div>}
+          {latestMoments.length > 0 ? latestMoments.map((moment) => <MomentCard key={moment.slug} moment={moment} />) : <EmptyState>还没有日常记录。</EmptyState>}
         </div>
       </section>
 

@@ -1,4 +1,5 @@
 import { MomentTimeline } from '@/components/moments/moment-timeline';
+import { PageHero } from '@/components/ui/page-hero';
 import { getAllMomentTags, getAllMoments } from '@/lib/moments';
 
 export default function MomentsPage() {
@@ -7,9 +8,7 @@ export default function MomentsPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-5 py-16">
-      <p className="text-sm text-leaf-700">Moments</p>
-      <h1 className="mt-3 text-4xl font-semibold text-leaf-900">日常记录</h1>
-      <p className="mt-4 max-w-2xl leading-8 text-leaf-700">这里用于记录图片、视频与生活片段。第一版采用时间线结构，由 `content/moments/*.mdx` 文件驱动。</p>
+      <PageHero eyebrow="Moments" title="日常记录" description="这里用于记录图片、视频与生活片段。第一版采用时间线结构，由 content/moments/*.mdx 文件驱动。" />
 
       {tags.length > 0 && (
         <div className="mt-8 flex flex-wrap gap-2">

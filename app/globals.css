@@ -38,6 +38,15 @@ a {
   color: var(--text);
 }
 
+input[type='range'] {
+  cursor: pointer;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .prose-life {
   color: var(--text);
   line-height: 1.9;
