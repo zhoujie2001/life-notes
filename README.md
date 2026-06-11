@@ -24,6 +24,20 @@ npm install
 npm run dev
 ```
 
+## Vercel Deployment
+
+Vercel 项目根目录必须设置为仓库根目录：
+
+```text
+Root Directory: ./
+Framework Preset: Next.js
+Install Command: npm ci
+Build Command: npm run build
+Output Directory: .next
+```
+
+如果 Vercel 报错未检测到 Next.js 版本，通常说明 Root Directory 选错了，导致 Vercel 没有读取到根目录的 `package.json`。
+
 ## Content
 
 ### Blog Posts
